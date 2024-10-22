@@ -12,7 +12,11 @@ def get_spacex_news():
         for item in soup.find_all('div', class_='xrnccd'):
             title = item.find('h3').text
             link = item.find('a', href=True)['href']
-            articles.append({'title': title, 'link': 'https://news.google.com' + link, 'source': 'Google News'})
+            articles.append({
+                'title': title,
+                'link': 'https://news.google.com' + link,
+                'source': 'Google News'
+            })
         
         return articles
     except Exception as e:
