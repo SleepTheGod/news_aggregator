@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Latest News Articles</h2>
+    <ul class="list-group">
+    {% for article in articles %}
+        <li class="list-group-item">
+            <a href="{{ article.link }}" target="_blank">{{ article.title }}</a> <small class="text-muted">({{ article.source }})</small>
+            <div class="text-muted">{{ article.timestamp }}</div>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
