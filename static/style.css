@@ -1,0 +1,18 @@
+body {
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+h1, h2 {
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-group-item {
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
