@@ -17,20 +17,26 @@ def create_tables():
 
 # Function to update news articles in the database
 def update_news():
-    spacex_news = get_spacex_news()
-    tesla_news = get_tesla_news()
-    fcc_news = get_fcc_news()
+    try:
+        spacex_news = get_spacex_news()
+        tesla_news = get_tesla_news()
+        fcc_news = get_fcc_news()
 
-    for article in spacex_news:
-        db.session.merge(NewsArticle(title=article['title'], link=article['link'], source='SpaceX'))
-    
-    for article in tesla_news:
-        db.session.merge(NewsArticle(title=article['title'], link=article['link'], source='Tesla'))
-    
-    for article in fcc_news:
-        db.session.merge(NewsArticle(title=article['title'], link=article['link'], source='FCC'))
-    
-    db.session.commit()
+        # Merge articles into the database to avoid duplicates
+        for article in spacex_news:
+            db.session.merge(NewsArticle(title=article['title'], link=article['link'], source='SpaceX'))
+        
+        for article in tesla_news:
+            db.session.merge(NewsArticle(title=article['title'], link=article['link'], source='Tesla'))
+        
+        for article in fcc_news:
+            db.session.merge(NewsArticle(title=article['title'], link=article['link'], source='FCC'))
+        
+        db.session.commit()
+        print("News articles updated successfully.")
+    except Exception as e:
+        print(f"Error updating news: {e}")
+        db.session.rollback()
 
 # Start scheduler to scrape every 30 minutes
 scheduler = BackgroundScheduler()
